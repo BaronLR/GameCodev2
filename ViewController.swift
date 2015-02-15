@@ -1,55 +1,91 @@
 
 import UIKit
 import SpriteKit
+import SceneKit
 
 class ViewController: UIViewController
 {
-    
+    var GameSelected = 0
     var currentRow:Int = 0
     var bodytemploss:Int = 0
     var currentCollum:Int = 0
     var positionArr = Array(count:5, repeatedValue:Array(count:5, repeatedValue:Rooms(newtemp: 0, newEnter: false)))
     var currentText:String = ""
     var bodyTempature:Float = 100
-    //var timer = NSTimer()
-    //var counter = 0
-    //var DoThisOnce:Bool = false
     
-  
+    //var myCounter = 0
+   // var timer:NSTimer?
+    /*
+    func fireTimer(){
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "typeLetter", userInfo: nil, repeats: true)
+    }
+    func typeLetter(var output:Array<Character>){
+        if myCounter < output.count {
+            lblOutput.text = lblOutput.text + String(output[myCounter])
+            let randomInterval = Double((arc4random_uniform(8)+1))/20
+            timer?.invalidate()
+            timer = NSTimer.scheduledTimerWithTimeInterval(randomInterval, target: self, selector: "typeLetter", userInfo: nil, repeats: false)
+        } else {
+            timer?.invalidate()
+        }
+        myCounter++
+    }
+*/
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     @IBOutlet weak var lblOutput: UITextView!
+    
+    @IBOutlet var ViewSelection: UISegmentedControl!
     
     @IBOutlet weak var lblTemp: UILabel!
     @IBOutlet weak var progressBodyTemp: UIProgressView!
+    
+    @IBAction func ViewSelectionSwitch(sender: UISegmentedControl)
+    {
+        lblOutput.text = lblOutput.text! + "\nSWITCH"
+        GameSelected++
+        if GameSelected % 2 == 0
+        {
+              lblOutput.text = lblOutput.text! + "\n In Game"
+        }
+        else
+        {
+              lblOutput.text = lblOutput.text! + "\n In Inventory"
+        }
+    }
     
     @IBAction func btnInventory(sender: UIButton)
     {
         //Open Inventory
     }
    
-    @IBAction func btnNorthPress(sender: UIButton) {
+    @IBAction func btnNorthPress(sender: UIButton)
+    {
           Inputmovement("North")
     }
     
-    @IBAction func btnEastPress(sender: UIButton) {
+    @IBAction func btnEastPress(sender: UIButton)
+    {
           Inputmovement("East")
     }
     
-    @IBAction func btnSouthPress(sender: UIButton) {
+    @IBAction func btnSouthPress(sender: UIButton)
+    {
           Inputmovement("South")
     }
-    @IBAction func btnWestPress(sender: UIButton) {
+    @IBAction func btnWestPress(sender: UIButton)
+    {
           Inputmovement("West")
     }
     
+    @IBOutlet var GameView: SKView!
     
     override func viewDidLoad()
     {
-//        [textview scrollRangeToVisible:textview.selectedRange];
-//        textview.scrollEnabled= NO;
-//        textview.text = [textview.text stringByAppendingString:createdString];
-//        textview.scrollEnabled= YES;
-       
         progressBodyTemp.progress = bodyTempature
         for var i = 0; i < 5; i++
         {
@@ -60,9 +96,8 @@ class ViewController: UIViewController
         }
         lblTemp.text = "It is " + positionArr[currentRow][currentCollum].tempature.description + "c in this room"
         returnText("You Wake Up")
-        //Inputmovement("North")
         super.viewDidLoad()
-       // arr2[currentRow][currentCollum]
+     
     }
    
     func createRooms() -> Rooms
@@ -196,8 +231,6 @@ class ViewController: UIViewController
        // }
         
          var roomReference = positionArr[currentRow][currentCollum]
-        
-        
         bodyTempature = bodyTempature - Float(calcTempLoss())
         progressBodyTemp.progress +=  bodyTempature
         
@@ -217,7 +250,25 @@ class ViewController: UIViewController
         
         var output2 = entered[roomReference.enteredBefore]![random() % temperature.count]
         var finalphrase = output1 + " and " + output2
-        lblOutput.text =  lblOutput.text! + "\n(" + Direction + ") "  + finalphrase
+        let OutputFinal  =   "\n\n(" + Direction + ") "  + finalphrase
+    
+        
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
+        {
+            for char in OutputFinal
+            {
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    self.lblOutput.text.append(char)
+                    return
+                }
+                self.lblOutput.clipsToBounds = true
+                usleep(20000)
+            }
+            
+        }
+        
         
         lblTemp.text = "It is " + positionArr[currentRow][currentCollum].tempature.description + "c in this room"
         lblOutput.scrollRangeToVisible(lblOutput.selectedRange)
@@ -230,52 +281,10 @@ class ViewController: UIViewController
     }
    
 
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-    }
+  
 
 
 
 }
 
 
-
-//if room tempature is less than zero, then text 1 is TRUE, therfore grabbing cold text
-//  var text2:String = entered[roomReference.enteredBefore[String]]
-// if
-
-
-/*
-if (tempature[roomReference.tempature <= 0] != nil) //It suggested I do this
-{
-[random() % tempature.count]
-}
-println(text1)
-var tempature =
-[
-true: ["It's cold Outside","it's warm"],
-false: ["It's warm Outside", "it's cold"]
-]
-
-var entered =
-[
-true: ["You have been here before","This isn't the first time you have been here before"],
-false: ["This room seems new","This is the first time you have been here"]
-]
-
-temperature =
-[
-true : [],
-false : []
-]
-entered =
-[
-true : [],
-false : []
-]
-
-text1 = temperature[room.temperature < 0].randomselect()
-text2 = entered[room.enteredBefore].randomselect()
-
-*/
