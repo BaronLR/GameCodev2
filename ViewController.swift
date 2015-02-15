@@ -46,43 +46,36 @@ class ViewController: UIViewController
     
     @IBAction func ViewSelectionSwitch(sender: UISegmentedControl)
     {
-        lblOutput.text = lblOutput.text! + "\nSWITCH"
+        
         GameSelected++
         if GameSelected % 2 == 0
         {
-              lblOutput.text = lblOutput.text! + "\n In Game"
+              lblOutput.text = lblOutput.text! + "\n (User) In Game"
         }
         else
         {
-              lblOutput.text = lblOutput.text! + "\n In Inventory"
+              lblOutput.text = lblOutput.text! + "\n (User) In Inventory"
         }
     }
     
-    @IBAction func btnInventory(sender: UIButton)
-    {
+    @IBAction func btnInventory(sender: UIButton) {
         //Open Inventory
     }
    
-    @IBAction func btnNorthPress(sender: UIButton)
-    {
+    @IBAction func btnNorthPress(sender: UIButton) {
           Inputmovement("North")
     }
     
-    @IBAction func btnEastPress(sender: UIButton)
-    {
+    @IBAction func btnEastPress(sender: UIButton) {
           Inputmovement("East")
     }
     
-    @IBAction func btnSouthPress(sender: UIButton)
-    {
+    @IBAction func btnSouthPress(sender: UIButton) {
           Inputmovement("South")
     }
-    @IBAction func btnWestPress(sender: UIButton)
-    {
+    @IBAction func btnWestPress(sender: UIButton) {
           Inputmovement("West")
     }
-    
-    @IBOutlet var GameView: SKView!
     
     override func viewDidLoad()
     {
@@ -100,8 +93,7 @@ class ViewController: UIViewController
      
     }
    
-    func createRooms() -> Rooms
-    {
+    func createRooms() -> Rooms {
         var initialTemp = Int(arc4random_uniform(20))
         var tempModifier = Int(arc4random_uniform(2))
        
@@ -110,7 +102,6 @@ class ViewController: UIViewController
             initialTemp *= -1   // Negative Temperature
         }
         var randomRoom = Rooms(newtemp: initialTemp, newEnter: false)
-        //println(initialTemp)
         return randomRoom
     }
 
@@ -150,70 +141,40 @@ class ViewController: UIViewController
             println("That is not an option")
         }
     }
-    func reachedCliff(var Direction:String)
-    {
-        lblOutput.text = lblOutput.text! + "\n(" + Direction + ")"   + " There is a wall this way"
-    }
+    
     
     func playerMovement(var Direction:String) //Get the direction they are heading
     {
-        if Direction == "North"
-        {
-            if currentRow == 0
-            {
-                reachedCliff(Direction)
-               
-            }
-            else
-            {
+        if Direction == "North" {
+            if currentRow == 0 {reachedCliff(Direction)}
+            else {
                 currentRow -= 1
-                returnText(Direction)
-            }
+                returnText(Direction) } }
             
-        }
-        if Direction == "East"
-        {
-            if currentCollum == 4
-            {
-                reachedCliff(Direction)
-            }
-            else
-            {
-               currentCollum += 1
-               returnText(Direction)
-            }
-        }
-        if Direction == "South"
-        {
-            if currentRow == 4
-            {
-                reachedCliff(Direction)
-            }
-            else
-            {
+       else if Direction == "East" {
+            if currentCollum == 4 { reachedCliff(Direction) }
+            else { currentCollum += 1
+               returnText(Direction) }}
+            
+       else if Direction == "South" {
+            if currentRow == 4 { reachedCliff(Direction)}
+            else {
             currentRow += 1
-            returnText(Direction)
-            }
-            
-        }
-        if Direction == "West"
-        {
-            if currentCollum == 0
-            {
-                reachedCliff(Direction)
-            }
-            else
-            {
+            returnText(Direction)}}
+        
+        if Direction == "West" {
+            if currentCollum == 0 {reachedCliff(Direction)}
+            else {
             currentCollum -= 1
             returnText(Direction)
             }
-            
-            
         }
-        
     }
-   
-    func calcTempLoss() -> Int
+    
+    func reachedCliff(var Direction:String) {
+        lblOutput.text = lblOutput.text! + "\n(" + Direction + ")"   + "Nothing but a rusting wall this way"
+    }
+    func calcTempLoss() -> Int //Work In Progress
     {
         
         var roomReference = positionArr[currentRow][currentCollum]
@@ -223,14 +184,26 @@ class ViewController: UIViewController
         
         
     }
+    func typeOutText(var output:String)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
+            {
+                for char in output
+                {
+                    dispatch_async(dispatch_get_main_queue())
+                        {
+                            self.lblOutput.text.append(char)
+                            return
+                    }
+                    self.lblOutput.clipsToBounds = true
+                    usleep(20000)
+                }
+                
+        }
+    }
     func returnText(var Direction:String)
     {
-       // if DoThisOnce == false
-        //{
-         // timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
-       // }
-        
-         var roomReference = positionArr[currentRow][currentCollum]
+        var roomReference = positionArr[currentRow][currentCollum]
         bodyTempature = bodyTempature - Float(calcTempLoss())
         progressBodyTemp.progress +=  bodyTempature
         
@@ -247,35 +220,13 @@ class ViewController: UIViewController
         ]
         
         var output1 = temperature[roomReference.tempature < 0]![random() % temperature.count]
-        
         var output2 = entered[roomReference.enteredBefore]![random() % temperature.count]
+        
         var finalphrase = output1 + " and " + output2
         let OutputFinal  =   "\n\n(" + Direction + ") "  + finalphrase
-    
-        
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
-        {
-            for char in OutputFinal
-            {
-                dispatch_async(dispatch_get_main_queue())
-                {
-                    self.lblOutput.text.append(char)
-                    return
-                }
-                self.lblOutput.clipsToBounds = true
-                usleep(20000)
-            }
-            
-        }
-        
+        typeOutText(OutputFinal)
         
         lblTemp.text = "It is " + positionArr[currentRow][currentCollum].tempature.description + "c in this room"
-        lblOutput.scrollRangeToVisible(lblOutput.selectedRange)
-        lblOutput.scrollEnabled = true
-        
-        
-      
         roomReference.enteredBefore = true
      
     }
