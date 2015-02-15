@@ -79,9 +79,9 @@
 		3FD2CF9D1A8A3EFA003E4330 /* GameCode */ = {
 			isa = PBXGroup;
 			children = (
+				3F8218591A8BB63E002700E1 /* Rooms.swift */,
 				3FD2CFA01A8A3EFA003E4330 /* AppDelegate.swift */,
 				3FEA41E21A8A85EE005D6F53 /* ViewController.swift */,
-				3F8218591A8BB63E002700E1 /* Rooms.swift */,
 				3FD2CFA41A8A3EFA003E4330 /* Main.storyboard */,
 				3FD2CFA91A8A3EFA003E4330 /* LaunchScreen.xib */,
 				3FD2CFA71A8A3EFA003E4330 /* Images.xcassets */,

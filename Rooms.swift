@@ -12,10 +12,11 @@ class Rooms
 {
     var tempature = 0
     var enteredBefore = false
+    var items:String
     
-    
-    init (newtemp:Int, newEnter:Bool)
+    init (newtemp:Int, newEnter:Bool, items:String)
     {
+        self.items = items
         self.tempature = newtemp
         self.enteredBefore = newEnter
     }

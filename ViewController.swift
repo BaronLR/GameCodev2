@@ -9,59 +9,27 @@ class ViewController: UIViewController
     var currentRow:Int = 0
     var bodytemploss:Int = 0
     var currentCollum:Int = 0
-    var positionArr = Array(count:5, repeatedValue:Array(count:5, repeatedValue:Rooms(newtemp: 0, newEnter: false)))
+    var positionArr = Array(count:10, repeatedValue:Array(count:10, repeatedValue:Rooms(newtemp: 0, newEnter: false, items:"")))
     var currentText:String = ""
     var bodyTempature:Float = 100
+    var Inventory:Array<String> = []
     
-    //var myCounter = 0
-   // var timer:NSTimer?
-    /*
-    func fireTimer(){
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "typeLetter", userInfo: nil, repeats: true)
-    }
-    func typeLetter(var output:Array<Character>){
-        if myCounter < output.count {
-            lblOutput.text = lblOutput.text + String(output[myCounter])
-            let randomInterval = Double((arc4random_uniform(8)+1))/20
-            timer?.invalidate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(randomInterval, target: self, selector: "typeLetter", userInfo: nil, repeats: false)
-        } else {
-            timer?.invalidate()
-        }
-        myCounter++
-    }
-*/
-    
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBOutlet weak var lblOutput: UITextView!
-    
+    @IBOutlet var btnInventory: UIButton!
+    @IBOutlet var btnCompassHead: UIImageView!
+    @IBOutlet var btnCompSouth: UIButton!
+    @IBOutlet var btnCompEast: UIButton!
+    @IBOutlet var btnCompNorth: UIButton!
+    @IBOutlet var btnCompWest: UIButton!
     @IBOutlet var ViewSelection: UISegmentedControl!
-    
     @IBOutlet weak var lblTemp: UILabel!
     @IBOutlet weak var progressBodyTemp: UIProgressView!
     
-    @IBAction func ViewSelectionSwitch(sender: UISegmentedControl)
-    {
-        
-        GameSelected++
-        if GameSelected % 2 == 0
-        {
-              lblOutput.text = lblOutput.text! + "\n (User) In Game"
-        }
-        else
-        {
-              lblOutput.text = lblOutput.text! + "\n (User) In Inventory"
-        }
-    }
-    
-    @IBAction func btnInventory(sender: UIButton) {
-        //Open Inventory
-    }
-   
     @IBAction func btnNorthPress(sender: UIButton) {
           Inputmovement("North")
     }
@@ -79,6 +47,7 @@ class ViewController: UIViewController
     
     override func viewDidLoad()
     {
+
         progressBodyTemp.progress = bodyTempature
         for var i = 0; i < 5; i++
         {
@@ -93,15 +62,19 @@ class ViewController: UIViewController
      
     }
    
-    func createRooms() -> Rooms {
+    func createRooms() -> Rooms
+    {
         var initialTemp = Int(arc4random_uniform(20))
         var tempModifier = Int(arc4random_uniform(2))
-       
+        var randomItemChoices:Array<String> = ["mysterious key","flashlight","pistol","nothing","nothing","nothing","blanket","warm coat","pack of matches"]
+        var ItemDiscription:Array<String> = ["",""] //This will be used later
+    
         if tempModifier == 1
         {
             initialTemp *= -1   // Negative Temperature
         }
-        var randomRoom = Rooms(newtemp: initialTemp, newEnter: false)
+        
+        var randomRoom = Rooms(newtemp: initialTemp, newEnter: false, items: randomItemChoices[random() % randomItemChoices.count])
         return randomRoom
     }
 
@@ -152,12 +125,12 @@ class ViewController: UIViewController
                 returnText(Direction) } }
             
        else if Direction == "East" {
-            if currentCollum == 4 { reachedCliff(Direction) }
+            if currentCollum == 9 { reachedCliff(Direction) }
             else { currentCollum += 1
                returnText(Direction) }}
             
        else if Direction == "South" {
-            if currentRow == 4 { reachedCliff(Direction)}
+            if currentRow == 9 { reachedCliff(Direction)}
             else {
             currentRow += 1
             returnText(Direction)}}
@@ -201,12 +174,25 @@ class ViewController: UIViewController
                 
         }
     }
+    func addToInventory()
+    {
+        var roomReference = positionArr[currentRow][currentCollum]
+        Inventory += [roomReference.items]
+        
+    }
+    
+    
     func returnText(var Direction:String)
     {
+        
+        for (index,value) in enumerate(Inventory){
+            println(value)
+        }
+        
+        
         var roomReference = positionArr[currentRow][currentCollum]
         bodyTempature = bodyTempature - Float(calcTempLoss())
         progressBodyTemp.progress +=  bodyTempature
-        
         
        let temperature =
         [
@@ -223,12 +209,52 @@ class ViewController: UIViewController
         var output2 = entered[roomReference.enteredBefore]![random() % temperature.count]
         
         var finalphrase = output1 + " and " + output2
-        let OutputFinal  =   "\n\n(" + Direction + ") "  + finalphrase
+        let OutputFinal  =   "\n\n(" + Direction + ") "  + finalphrase + ". You found a " + roomReference.items + "\n You have " + Inventory.debugDescription
         typeOutText(OutputFinal)
         
         lblTemp.text = "It is " + positionArr[currentRow][currentCollum].tempature.description + "c in this room"
         roomReference.enteredBefore = true
      
+    }
+    
+    @IBAction func ViewSelectionSwitch(sender: UISegmentedControl)
+    {
+        GameSelected++
+        if GameSelected % 2 == 0
+        {
+            lblOutput.text = lblOutput.text! + "\n\n(User) In Game"
+            inGame()
+        }
+        else
+        {
+            lblOutput.text = lblOutput.text! + "\n\n(User) In Inventory"
+            inInventory()
+        }
+    }
+    func inGame()
+    {
+        lblOutput.hidden = false
+        lblTemp.hidden = false
+        btnCompassHead.hidden = false
+        btnCompEast.hidden = false
+        btnCompSouth.hidden = false
+        btnCompWest.hidden = false
+        btnCompNorth.hidden = false
+        btnInventory.hidden = true
+        progressBodyTemp.hidden = false
+    }
+    func inInventory()
+    {
+        lblOutput.hidden = true
+        lblTemp.hidden = true
+        btnCompassHead.hidden = true
+        btnCompEast.hidden = true
+        btnCompSouth.hidden = true
+        btnCompWest.hidden = true
+        btnCompNorth.hidden = true
+        btnInventory.hidden = false
+        progressBodyTemp.hidden = true
+        
     }
    
 
