@@ -13,18 +13,25 @@ class ViewController: UIViewController
     var currentText:String = ""
     var bodyTempature:Float = 100
     var Inventory:Array<String> = []
+    var ItemButtonArray:Array<UIButton> = []
     
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
     }
+    @IBAction func btnInventoryClick(sender: UIButton)
+    {
+        
+    }
 
+   
     @IBOutlet weak var lblOutput: UITextView!
     @IBOutlet var btnInventory: UIButton!
     @IBOutlet var btnCompassHead: UIImageView!
     @IBOutlet var btnCompSouth: UIButton!
     @IBOutlet var btnCompEast: UIButton!
-    @IBOutlet var btnCompNorth: UIButton!
+    @IBOutlet var btnCompNorth: UIView!
+
     @IBOutlet var btnCompWest: UIButton!
     @IBOutlet var ViewSelection: UISegmentedControl!
     @IBOutlet weak var lblTemp: UILabel!
@@ -66,7 +73,9 @@ class ViewController: UIViewController
     {
         var initialTemp = Int(arc4random_uniform(20))
         var tempModifier = Int(arc4random_uniform(2))
+        
         var randomItemChoices:Array<String> = ["mysterious key","flashlight","pistol","nothing","nothing","nothing","blanket","warm coat","pack of matches"]
+        
         var ItemDiscription:Array<String> = ["",""] //This will be used later
     
         if tempModifier == 1
@@ -176,9 +185,17 @@ class ViewController: UIViewController
     }
     func addToInventory()
     {
-        var roomReference = positionArr[currentRow][currentCollum]
-        Inventory += [roomReference.items]
         
+        var roomReference = positionArr[currentRow][currentCollum]
+        if roomReference.items != "nothing"
+        {
+          Inventory.extend([roomReference.items])
+        }
+        for var i = 0; i < Inventory.count; i++
+        {
+           // self.lblOutput.text.append(Inventory[i])
+        }
+    
     }
     
     
@@ -207,12 +224,18 @@ class ViewController: UIViewController
         
         var output1 = temperature[roomReference.tempature < 0]![random() % temperature.count]
         var output2 = entered[roomReference.enteredBefore]![random() % temperature.count]
-        
+        var output3 = "\n\nYou're watch says it's " + roomReference.tempature.description + "c in this room"
+
         var finalphrase = output1 + " and " + output2
-        let OutputFinal  =   "\n\n(" + Direction + ") "  + finalphrase + ". You found a " + roomReference.items + "\n You have " + Inventory.debugDescription
-        typeOutText(OutputFinal)
         
-        lblTemp.text = "It is " + positionArr[currentRow][currentCollum].tempature.description + "c in this room"
+        let OutputFinal  =   "\n\n(" + Direction + ") "  + finalphrase + ". You found a " + roomReference.items + output3
+        
+        addToInventory()
+        dump(Inventory)
+        
+        typeOutText(OutputFinal + Inventory.count.description)
+        
+        //lblTemp.text = "It is " + positionArr[currentRow][currentCollum].tempature.description + "c in this room"
         roomReference.enteredBefore = true
      
     }
