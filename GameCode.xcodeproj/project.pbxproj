@@ -37,7 +37,7 @@
 		3FD2CFB01A8A3EFA003E4330 /* GameCodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameCodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD2CFB51A8A3EFA003E4330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FD2CFB61A8A3EFA003E4330 /* GameCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCodeTests.swift; sourceTree = "<group>"; };
-		3FEA41E21A8A85EE005D6F53 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = SOURCE_ROOT; };
+		3FEA41E21A8A85EE005D6F53 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

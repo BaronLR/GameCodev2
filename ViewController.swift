@@ -9,33 +9,30 @@ class ViewController: UIViewController
     var currentRow:Int = 0
     var bodytemploss:Int = 0
     var currentCollum:Int = 0
-    var positionArr = Array(count:10, repeatedValue:Array(count:10, repeatedValue:Rooms(newtemp: 0, newEnter: false, items:"")))
+    var positionArr = Array(count:20, repeatedValue:Array(count:20, repeatedValue:Rooms(newtemp: 0, newEnter: false, items:"")))
     var currentText:String = ""
     var bodyTempature:Float = 100
     var Inventory:Array<String> = []
     var ItemButtonArray:Array<UIButton> = []
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-    }
-    @IBAction func btnInventoryClick(sender: UIButton)
-    {
-        
-    }
-
-   
+    @IBOutlet var btnCompNorth: UIButton!
     @IBOutlet weak var lblOutput: UITextView!
     @IBOutlet var btnInventory: UIButton!
     @IBOutlet var btnCompassHead: UIImageView!
     @IBOutlet var btnCompSouth: UIButton!
     @IBOutlet var btnCompEast: UIButton!
-    @IBOutlet var btnCompNorth: UIView!
-
     @IBOutlet var btnCompWest: UIButton!
     @IBOutlet var ViewSelection: UISegmentedControl!
     @IBOutlet weak var lblTemp: UILabel!
     @IBOutlet weak var progressBodyTemp: UIProgressView!
+    @IBOutlet var button01: UIButton!
+    @IBOutlet var button02: UIButton!
+    @IBOutlet var button03: UIButton!
+    @IBOutlet var button04: UIButton!
+    @IBOutlet var button05: UIButton!
+    @IBOutlet var lblBodyTemperature: UILabel!
+    @IBOutlet var progBodyTemperature: UIProgressView!
+  
+   
     
     @IBAction func btnNorthPress(sender: UIButton) {
           Inputmovement("North")
@@ -52,74 +49,90 @@ class ViewController: UIViewController
           Inputmovement("West")
     }
     
+    var counter:Int = 0 {
+        didSet {
+            let fractionalProgress = Float(counter) / 100.0
+            let animated = counter != 0
+            
+            progBodyTemperature.setProgress(fractionalProgress, animated: animated)
+            lblBodyTemperature.text = ("\(counter)%")
+        }
+    }
+  
+   
+    
     override func viewDidLoad()
     {
-
-        progressBodyTemp.progress = bodyTempature
-        for var i = 0; i < 5; i++
+        lblBodyTemperature.hidden = false
+        lblBodyTemperature.text = ("You're body temperature is at\(counter)%")
+        self.counter = 90
+        var maxCollum:Int = 19
+        var maxRow:Int = 19
+        currentCollum = random() % maxCollum
+        currentRow = random() % maxRow
+        disableButtonsForLaunch()
+    
+        for var i = 0; i < 19; i++
         {
-            for var j = 0; j < 5; j++
+            for var j = 0; j < 19; j++
             {
                 positionArr[i][j] = createRooms();
             }
         }
-        lblTemp.text = "It is " + positionArr[currentRow][currentCollum].tempature.description + "c in this room"
+   
         returnText("You Wake Up")
         super.viewDidLoad()
      
     }
+    
+    func disableButtonsForLaunch() {
+        button01.hidden = true
+        button02.hidden = true
+        button03.hidden = true
+        button04.hidden = true
+        button05.hidden = true
+    }
    
-    func createRooms() -> Rooms
-    {
+    func createRooms() -> Rooms {
         var initialTemp = Int(arc4random_uniform(20))
         var tempModifier = Int(arc4random_uniform(2))
+        var randomItemChoices:Array<String> = ["Mysterious Key","Flashlight","Pistol","nothing","nothing","nothing","Blanket","Warm coat","Pack of matches","nothing","Cup of Coco"]
         
-        var randomItemChoices:Array<String> = ["mysterious key","flashlight","pistol","nothing","nothing","nothing","blanket","warm coat","pack of matches"]
-        
-        var ItemDiscription:Array<String> = ["",""] //This will be used later
-    
-        if tempModifier == 1
-        {
-            initialTemp *= -1   // Negative Temperature
+        var ItemDiscription:Array<String> = ["",""]
+        if tempModifier == 1 {
+            initialTemp *= -1
         }
         
         var randomRoom = Rooms(newtemp: initialTemp, newEnter: false, items: randomItemChoices[random() % randomItemChoices.count])
         return randomRoom
     }
 
-    func Inputmovement(var userInput:String)
-    {
+    func Inputmovement(var userInput:String) { //Only used if Keyboard Input
         var dictionaryMovement = Array(arrayLiteral: "North","East","South","West")
         var dictNorth = Array(arrayLiteral: "North", "north", "n" )
         var dictEast = Array(arrayLiteral: "East", "east", "e" )
         var dictWest = Array(arrayLiteral: "West", "west", "w" )
         var dictSouth = Array(arrayLiteral: "South", "south", "s" )
-        if contains(dictionaryMovement, userInput)
-        {
-            if contains(dictNorth, userInput)
-            {
+        if contains(dictionaryMovement, userInput) {
+            if contains(dictNorth, userInput) {
                 playerMovement("North")
                 println("You head North")
             }
-            if contains(dictSouth, userInput)
-            {
+            if contains(dictSouth, userInput) {
                 playerMovement("South")
                 println("You head South")
             }
-            if contains(dictEast, userInput)
-            {
+            if contains(dictEast, userInput) {
                 playerMovement("East")
                 println("You head East")
                 
             }
-            if contains(dictWest, userInput)
-            {
+            if contains(dictWest, userInput) {
                 playerMovement("West")
                 println("You West")
             }
         }
-        else
-        {
+        else {
             println("That is not an option")
         }
     }
@@ -134,12 +147,12 @@ class ViewController: UIViewController
                 returnText(Direction) } }
             
        else if Direction == "East" {
-            if currentCollum == 9 { reachedCliff(Direction) }
+            if currentCollum == 19 { reachedCliff(Direction) }
             else { currentCollum += 1
                returnText(Direction) }}
             
        else if Direction == "South" {
-            if currentRow == 9 { reachedCliff(Direction)}
+            if currentRow == 19 { reachedCliff(Direction)}
             else {
             currentRow += 1
             returnText(Direction)}}
@@ -154,7 +167,13 @@ class ViewController: UIViewController
     }
     
     func reachedCliff(var Direction:String) {
-        lblOutput.text = lblOutput.text! + "\n(" + Direction + ")"   + "Nothing but a rusting wall this way"
+        let HitWallPhrases =
+        [
+            "This must be one of the only rooms in here without a door...", "It's just a wall... with no door.",
+            "Why is there no door? It's just a rusty old wall...", "I don't think I can go this way", "This is interesting, you can't go this way..."
+        ]
+        let HitAWall = "\n\n(" + Direction + ")"   +  HitWallPhrases[random() % HitWallPhrases.count]
+        typeOutText(HitAWall)
     }
     func calcTempLoss() -> Int //Work In Progress
     {
@@ -166,77 +185,104 @@ class ViewController: UIViewController
         
         
     }
+    func addButtons()
+    {
+      
+        let buttonArray = [button01,button02,button03,button04,button05]
+        for var i = 0 ; i < Inventory.count;
+        {
+            if Inventory.count <= 4
+            {
+            
+               if Inventory[i] != "nothing"
+               {
+                   buttonArray[i].setTitle(Inventory[i], forState: .Normal)
+                   i++
+               }
+            }
+            
+        }
+        
+    }
+
     func typeOutText(var output:String)
     {
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
             {
                 for char in output
                 {
+                  
                     dispatch_async(dispatch_get_main_queue())
                         {
                             self.lblOutput.text.append(char)
+                          
                             return
                     }
                     self.lblOutput.clipsToBounds = true
-                    usleep(20000)
+                    usleep(40000)
                 }
+           
+             
                 
         }
+       
     }
-    func addToInventory()
-    {
+    func addToInventory() {
         
         var roomReference = positionArr[currentRow][currentCollum]
         if roomReference.items != "nothing"
         {
           Inventory.extend([roomReference.items])
         }
-        for var i = 0; i < Inventory.count; i++
-        {
-           // self.lblOutput.text.append(Inventory[i])
-        }
-    
+        addButtons()
+        
+        self.counter += roomReference.tempature
+
     }
-    
+  
+    func AorNot() -> String {
+        var roomReference = positionArr[currentRow][currentCollum]
+        var AorNot:String = ""
+        if roomReference.items != "nothing" { //determines whether the sentence requires an 'a', if the room does not have an item, the sentence doesn't require a 'a'
+            AorNot = "a "
+        } else {
+            AorNot = ""
+        }
+        return AorNot
+    }
     
     func returnText(var Direction:String)
     {
-        
-        for (index,value) in enumerate(Inventory){
-            println(value)
-        }
-        
-        
         var roomReference = positionArr[currentRow][currentCollum]
-        bodyTempature = bodyTempature - Float(calcTempLoss())
-        progressBodyTemp.progress +=  bodyTempature
-        
+        addToInventory() //Add's current rooms items to Inventory
+        lblBodyTemperature.text = ("You're body temperature is at\(counter)%")
        let temperature =
         [
-            true : ["It's freezing in here","You can see you're own breath","You can't stay here for long it's too cold"],
-            false : ["it's warm","You can get warmed up in here", "you're relieved that it's warm"]
+            true : ["It's absolutely freezing in here, you need to find a way to warm up","You can see you're own breath","You can't stay here for long it's too cold"],
+            false : ["It's rather warm in this room","It's starting to feel warm in here", "You're relieved that the tempaure is resonable","It's fairly warm in this room","It's not that bad in this room, temperature wise"]
         ]
         let entered =
         [
-            true : ["you've been here before", "this room is familiar","You've seen this room before"],
-            false : ["you've never seen this room", "it's definatly the first time you have entered this room","This is room seems new"]
+            true : ["you have seen this room before", "either all of these rooms are starting to look the same, or you really have been here before " ,"you remember this place, but how?","you've seen this room before", "have you been walking in circles or something? You have been here before"],
+            false : ["yet, you have never seen this place before...", "it's definatly the first time you have entered this room","This is room seems new"]
         ]
-        
+        let findingItems =
+        [
+            "After searching the room you found ","You sort through an old desk and you find ", "You turn around and search a cabnit, inside you discovered ","There is a hole in the rusting wall, inside of it you find "
+        ]
         var output1 = temperature[roomReference.tempature < 0]![random() % temperature.count]
         var output2 = entered[roomReference.enteredBefore]![random() % temperature.count]
-        var output3 = "\n\nYou're watch says it's " + roomReference.tempature.description + "c in this room"
-
-        var finalphrase = output1 + " and " + output2
+        var phraseTemp = ". You're watch says it's " + roomReference.tempature.description + "c in this room. You have used " +  Inventory.count.description + "/5ths of the space in your backpack. "
+        var phraseDirectionStart = "\n\n(" + Direction + ") "
+        var finalphrase = output1 + " and " + output2 + ". "
         
-        let OutputFinal  =   "\n\n(" + Direction + ") "  + finalphrase + ". You found a " + roomReference.items + output3
         
-        addToInventory()
+        let OutputFinal = phraseDirectionStart + finalphrase + findingItems[random() % findingItems.count] + AorNot() + roomReference.items + phraseTemp
+        
         dump(Inventory)
         
-        typeOutText(OutputFinal + Inventory.count.description)
-        
-        //lblTemp.text = "It is " + positionArr[currentRow][currentCollum].tempature.description + "c in this room"
-        roomReference.enteredBefore = true
+        typeOutText(OutputFinal)
      
     }
     
@@ -245,45 +291,57 @@ class ViewController: UIViewController
         GameSelected++
         if GameSelected % 2 == 0
         {
-            lblOutput.text = lblOutput.text! + "\n\n(User) In Game"
+            //lblOutput.text = lblOutput.text! + "\n\n(User) In Game"
             inGame()
         }
         else
         {
-            lblOutput.text = lblOutput.text! + "\n\n(User) In Inventory"
+          // lblOutput.text = lblOutput.text! + "\n\n(User) In Inventory"
             inInventory()
         }
     }
     func inGame()
     {
         lblOutput.hidden = false
-        lblTemp.hidden = false
+        lblBodyTemperature.hidden = false
         btnCompassHead.hidden = false
         btnCompEast.hidden = false
         btnCompSouth.hidden = false
         btnCompWest.hidden = false
         btnCompNorth.hidden = false
         btnInventory.hidden = true
-        progressBodyTemp.hidden = false
+        progBodyTemperature.hidden = false
+        button01.hidden = true
+        button02.hidden = true
+        button03.hidden = true
+        button04.hidden = true
+        button05.hidden = true
     }
     func inInventory()
     {
+        progBodyTemperature.hidden = true
+        lblBodyTemperature.hidden = true
         lblOutput.hidden = true
-        lblTemp.hidden = true
+  
         btnCompassHead.hidden = true
         btnCompEast.hidden = true
         btnCompSouth.hidden = true
         btnCompWest.hidden = true
         btnCompNorth.hidden = true
         btnInventory.hidden = false
-        progressBodyTemp.hidden = true
+        progBodyTemperature.hidden = true
+        button01.hidden = false
+        button02.hidden = false
+        button03.hidden = false
+        button04.hidden = false
+        button05.hidden = false
         
     }
-   
-
-  
-
-
+    
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+    }
 
 }
 
