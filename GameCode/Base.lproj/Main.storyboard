@@ -82,41 +82,50 @@
                                     <action selector="ViewSelectionSwitch:" destination="vXZ-lx-hvc" eventType="valueChanged" id="1cR-WZ-Omm"/>
                                 </connections>
                             </segmentedControl>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="You wake up in a small room... where are you? How did you get here? How will you escape. " translatesAutoresizingMaskIntoConstraints="NO" id="PKd-6x-QeV">
-                                <rect key="frame" x="0.0" y="0.0" width="348" height="320"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KlA-AY-Mah">
-                                <rect key="frame" x="197" y="89" width="175" height="30"/>
-                                <state key="normal">
+                                <rect key="frame" x="225" y="89" width="175" height="30"/>
+                                <state key="normal" title="Inv2">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnInv2Click:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8Lv-xF-xVA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34n-vs-3Zj">
-                                <rect key="frame" x="197" y="113" width="175" height="30"/>
-                                <state key="normal">
+                                <rect key="frame" x="225" y="113" width="175" height="30"/>
+                                <state key="normal" title="Inv3">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnInv3Click:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="I1A-ym-ajW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMH-Se-hSA">
-                                <rect key="frame" x="197" y="137" width="175" height="30"/>
-                                <state key="normal">
+                                <rect key="frame" x="225" y="145" width="175" height="30"/>
+                                <state key="normal" title="Inv4">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnInv4Click:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="XMR-VH-uGg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2y-Cq-Axi">
-                                <rect key="frame" x="197" y="159" width="175" height="30"/>
-                                <state key="normal">
+                                <rect key="frame" x="225" y="174" width="175" height="30"/>
+                                <state key="normal" title="Inv5">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnInv5Clikc:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bcc-GE-WDh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYC-HB-F7X">
-                                <rect key="frame" x="197" y="65" width="175" height="30"/>
-                                <state key="normal">
+                                <rect key="frame" x="225" y="65" width="175" height="30"/>
+                                <state key="normal" title="Inv1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnInv1Click:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oSU-Tk-HHv"/>
+                                </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You're body Tempature is a 100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsU-Tr-gd3">
                                 <rect key="frame" x="365" y="94" width="182" height="19"/>
@@ -127,6 +136,12 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pjQ-fd-TrR">
                                 <rect key="frame" x="386" y="127" width="141" height="2"/>
                             </progressView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="You wake up in a small room... where are you? How did you get here? How will you escape. " translatesAutoresizingMaskIntoConstraints="NO" id="PKd-6x-QeV">
+                                <rect key="frame" x="0.0" y="0.0" width="348" height="320"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -143,12 +158,13 @@
                         <outlet property="btnCompSouth" destination="JNc-8w-KMb" id="ctU-cn-fzI"/>
                         <outlet property="btnCompWest" destination="WAz-TN-RIP" id="rzz-f0-VDR"/>
                         <outlet property="btnCompassHead" destination="V0V-al-tTh" id="0nN-uV-Wym"/>
+                        <outlet property="btnInv1" destination="gYC-HB-F7X" id="QGl-g7-ahb"/>
+                        <outlet property="btnInv2" destination="KlA-AY-Mah" id="yBv-oV-hOR"/>
+                        <outlet property="btnInv2Click" destination="KlA-AY-Mah" id="3GD-5w-hCW"/>
+                        <outlet property="btnInv3" destination="34n-vs-3Zj" id="HCj-Hj-gkM"/>
+                        <outlet property="btnInv4" destination="UMH-Se-hSA" id="1I6-Bv-e2g"/>
+                        <outlet property="btnInv5" destination="o2y-Cq-Axi" id="JBt-op-Xj2"/>
                         <outlet property="btnInventory" destination="Mal-rV-qrM" id="12s-K3-Dzc"/>
-                        <outlet property="button01" destination="gYC-HB-F7X" id="FGE-K5-gbc"/>
-                        <outlet property="button02" destination="KlA-AY-Mah" id="kD7-yg-xMD"/>
-                        <outlet property="button03" destination="34n-vs-3Zj" id="N8S-p5-Ted"/>
-                        <outlet property="button04" destination="UMH-Se-hSA" id="QvR-c0-i1s"/>
-                        <outlet property="button05" destination="o2y-Cq-Axi" id="N1D-Yj-i00"/>
                         <outlet property="lblBodyTemperature" destination="JsU-Tr-gd3" id="cEi-AR-saU"/>
                         <outlet property="lblOutput" destination="PKd-6x-QeV" id="6gM-sS-ZdJ"/>
                         <outlet property="progBodyTemperature" destination="pjQ-fd-TrR" id="jYb-tD-V0J"/>

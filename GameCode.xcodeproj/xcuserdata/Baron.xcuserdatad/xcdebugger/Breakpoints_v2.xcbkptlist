@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "typeOutText(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "typeOutText(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "Inputmovement(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "returnText(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "returnText(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,13 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446263206.016213"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -122,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "ViewSelectionSwitch(_:)"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
+            landmarkName = "inGame()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,27 +138,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "calcTempLoss()"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "addButtons()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,13 +170,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.swift"
-            timestampString = "446264476.514677"
+            timestampString = "446343836.554945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
             landmarkName = "inGame()"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewController.swift"
+            timestampString = "446343871.607556"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewController.swift"
+            timestampString = "446343901.258435"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "6"
+            endingLineNumber = "6"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GameCode.ViewController.__deallocating_deinit"
+                  moduleName = "GameCode"
+                  urlString = "file:///Users/Baron/Desktop/Versions%20of%20Code/GameCodev2/ViewController.swift"
+                  timestampString = "446358437.352683"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "6"
+                  endingLineNumber = "6"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc GameCode.ViewController.__ivar_destroyer"
+                  moduleName = "GameCode"
+                  urlString = "file:///Users/Baron/Desktop/Versions%20of%20Code/GameCodev2/ViewController.swift"
+                  timestampString = "446358437.353426"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "6"
+                  endingLineNumber = "6"
+                  offsetFromSymbolStart = "21">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

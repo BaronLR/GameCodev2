@@ -24,11 +24,7 @@ class ViewController: UIViewController
     @IBOutlet var ViewSelection: UISegmentedControl!
     @IBOutlet weak var lblTemp: UILabel!
     @IBOutlet weak var progressBodyTemp: UIProgressView!
-    @IBOutlet var button01: UIButton!
-    @IBOutlet var button02: UIButton!
-    @IBOutlet var button03: UIButton!
-    @IBOutlet var button04: UIButton!
-    @IBOutlet var button05: UIButton!
+  
     @IBOutlet var lblBodyTemperature: UILabel!
     @IBOutlet var progBodyTemperature: UIProgressView!
   
@@ -48,15 +44,41 @@ class ViewController: UIViewController
     @IBAction func btnWestPress(sender: UIButton) {
           Inputmovement("West")
     }
-    
+    @IBAction func btnInv1Click(sender: UIButton) {
+        usingInvItems(btnInv1.description)
+    }
+    @IBAction func btnInv2Click(sender: UIButton) {
+        
+    }
+    @IBAction func btnInv3Click(sender: UIButton) {
+        
+    }
+    @IBAction func btnInv4Click(sender: UIButton) {
+        
+    }
+    @IBAction func btnInv5Clikc(sender: UIButton) {
+        
+    }
+   
+    @IBOutlet var btnInv1: UIButton!
+    @IBOutlet var btnInv2: UIButton!
+    @IBOutlet var btnInv3: UIButton!
+    @IBOutlet var btnInv4: UIButton!
+    @IBOutlet var btnInv5: UIButton!
+  
     var counter:Int = 0 {
         didSet {
             let fractionalProgress = Float(counter) / 100.0
             let animated = counter != 0
-            
+            if counter > 100 {
+                counter = 100
+            }
             progBodyTemperature.setProgress(fractionalProgress, animated: animated)
             lblBodyTemperature.text = ("\(counter)%")
         }
+    }
+    func usingInvItems(var Item:String) {
+        println(Item)
     }
   
    
@@ -85,14 +107,6 @@ class ViewController: UIViewController
      
     }
     
-    func disableButtonsForLaunch() {
-        button01.hidden = true
-        button02.hidden = true
-        button03.hidden = true
-        button04.hidden = true
-        button05.hidden = true
-    }
-   
     func createRooms() -> Rooms {
         var initialTemp = Int(arc4random_uniform(20))
         var tempModifier = Int(arc4random_uniform(2))
@@ -157,13 +171,25 @@ class ViewController: UIViewController
             currentRow += 1
             returnText(Direction)}}
         
-        if Direction == "West" {
+       else if Direction == "West" {
             if currentCollum == 0 {reachedCliff(Direction)}
             else {
             currentCollum -= 1
             returnText(Direction)
             }
         }
+    }
+    func disableButtonsForLaunch() {
+        btnInv1.hidden = true
+        btnInv2.hidden = true
+        btnInv3.hidden = true
+        btnInv4.hidden = true
+        btnInv5.hidden = true
+        btnInv1.setTitle("", forState: .Normal)
+        btnInv2.setTitle("", forState: .Normal)
+        btnInv3.setTitle("", forState: .Normal)
+        btnInv4.setTitle("", forState: .Normal)
+        btnInv5.setTitle("", forState: .Normal)
     }
     
     func reachedCliff(var Direction:String) {
@@ -188,7 +214,7 @@ class ViewController: UIViewController
     func addButtons()
     {
       
-        let buttonArray = [button01,button02,button03,button04,button05]
+        let buttonArray = [btnInv1,btnInv2,btnInv3,btnInv4,btnInv5]
         for var i = 0 ; i < Inventory.count;
         {
             if Inventory.count <= 4
@@ -311,11 +337,11 @@ class ViewController: UIViewController
         btnCompNorth.hidden = false
         btnInventory.hidden = true
         progBodyTemperature.hidden = false
-        button01.hidden = true
-        button02.hidden = true
-        button03.hidden = true
-        button04.hidden = true
-        button05.hidden = true
+        btnInv1.hidden = true
+        btnInv2.hidden = true
+        btnInv3.hidden = true
+        btnInv4.hidden = true
+        btnInv5.hidden = true
     }
     func inInventory()
     {
@@ -330,11 +356,11 @@ class ViewController: UIViewController
         btnCompNorth.hidden = true
         btnInventory.hidden = false
         progBodyTemperature.hidden = true
-        button01.hidden = false
-        button02.hidden = false
-        button03.hidden = false
-        button04.hidden = false
-        button05.hidden = false
+        btnInv1.hidden = false
+        btnInv2.hidden = false
+        btnInv3.hidden = false
+        btnInv4.hidden = false
+        btnInv5.hidden = false
         
     }
     
